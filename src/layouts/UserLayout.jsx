@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Outlet } from "react-router-dom";
 
 // import component

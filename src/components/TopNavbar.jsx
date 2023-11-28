@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useNavigate, useLocation } from "react-router-dom";
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
 
@@ -9,11 +10,25 @@ const TopNavbar = ({ routes }) => {
   const location = useLocation();
 
   return (
-    <Navbar fixed="top" collapseOnSelect expand="lg" className="bg-body-tertiary shadow">
+    <Navbar
+      fixed="top"
+      collapseOnSelect
+      expand="lg"
+      className="bg-body-tertiary shadow"
+    >
       <Container>
-        <Navbar.Brand style={{ cursor: "pointer" }} onClick={() => navigate("/")}>
+        <Navbar.Brand
+          style={{ cursor: "pointer" }}
+          onClick={() => navigate("/")}
+        >
           <div className="d-flex align-items-center">
-            <img alt="Crown Logo" src={imgCrown} width="50" height="50" className="d-inline-block align-top" />
+            <img
+              alt="Crown Logo"
+              src={imgCrown}
+              width="50"
+              height="50"
+              className="d-inline-block align-top"
+            />
             <div className="ms-2">
               <p className="mb-0 fs-5 fw-bold">Grand Atma</p>
               <p className="small mb-0">Hotel & Resort</p>
@@ -25,7 +40,12 @@ const TopNavbar = ({ routes }) => {
           <Nav className="ms-auto">
             {routes?.map((route, index) => (
               <Nav.Link key={index} onClick={() => navigate(route.path)}>
-                <Button variant={location.pathname === route.path ? "primary" : "light"} className="w-100">
+                <Button
+                  variant={
+                    location.pathname === route.path ? "primary" : "light"
+                  }
+                  className="w-100"
+                >
                   {route.name}
                 </Button>
               </Nav.Link>

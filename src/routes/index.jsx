@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
@@ -5,8 +6,8 @@ import MainLayout from "../layouts/MainLayout";
 import UserLayout from "../layouts/UserLayout";
 
 import HomePage from "../pages/HomePage";
-import LoginPage from "../pages/LoginPage";
-import RegisterPage from "../pages/RegisterPage";
+import LoginPage from "../pages/auth/LoginPage";
+import RegisterPage from "../pages/auth/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
 import ContentPage from "../pages/ContentPage";
 
@@ -18,7 +19,6 @@ const router = createBrowserRouter([
     element: <div>Routes Not Found!</div>,
   },
   {
-    element: <MainLayout />,
     children: [
       {
         path: "/",

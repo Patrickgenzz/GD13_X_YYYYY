@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Container } from "react-bootstrap";
 
 const HomePage = () => {

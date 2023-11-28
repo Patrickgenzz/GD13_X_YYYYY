@@ -1,7 +1,8 @@
+// @ts-nocheck
 import { Container } from "react-bootstrap";
 
-import FormLogin from "../components/forms/FormLogin";
-import imgCrown from "../assets/images/crown.png";
+import FormLogin from "../../components/forms/FormLogin";
+import imgCrown from "../../assets/images/crown.png";
 
 const LoginPage = () => {
   return (

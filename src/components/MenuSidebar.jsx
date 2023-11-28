@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from "react";
 import { Offcanvas, Button } from "react-bootstrap";
 
