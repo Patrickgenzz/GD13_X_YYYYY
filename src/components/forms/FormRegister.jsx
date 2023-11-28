@@ -60,7 +60,6 @@ const FormRegister = () => {
         onChange={handleChange}
         placeholder="Masukkan Nama"
       />
-
       <InputFloatingForm
         type="text"
         label="Name"
@@ -84,12 +83,15 @@ const FormRegister = () => {
         placeholder="Masukkan Password"
         autoComplete="off"
       />
-      <Form.Check
-        type="checkbox"
-        onChange={handleCheck}
-        label="Have you Already Read the term and condition"
-      />
-
+      <div className="d-flex justify-content-start">
+        <Form.Check type="checkbox" onChange={handleCheck} />
+        <p className="ms-2">
+          Have you Already Read the{" "}
+          <a href="https://www.youtube.com/static?template=terms&gl=ID">
+            Terms of Service
+          </a>
+        </p>
+      </div>
       <Button
         disabled={isDisabled}
         type="submit"

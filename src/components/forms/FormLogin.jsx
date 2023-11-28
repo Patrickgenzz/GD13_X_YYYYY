@@ -10,10 +10,12 @@ import { SignIn } from "../../api/apiAuth";
 
 const FormLogin = () => {
   const navigate = useNavigate();
+  const [isDisabled, setIsDisabled] = useState(true);
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+
 
   const moveToRegister = () => {
     navigate("/register");
@@ -21,6 +23,11 @@ const FormLogin = () => {
 
   const handleChange = (event) => {
     setData({ ...data, [event.target.name]: event.target.value });
+    if (data.email.trim().length > 0 && data.password.length > 0) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
   };
 
   const Login = (event) => {
@@ -35,7 +42,7 @@ const FormLogin = () => {
       })
       .catch((err) => {
         console.log(err);
-        toast.error(err.message);
+        toast.dark(`🫃 ` + err.message);
       });
   };
 
@@ -68,6 +75,7 @@ const FormLogin = () => {
       <Button
         variant="primary"
         type="submit"
+        disabled={isDisabled}
         className="mt-3 w-100 border-0 buttonSubmit btn-lg"
       >
         Sign In
