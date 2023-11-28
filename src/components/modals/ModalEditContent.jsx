@@ -3,17 +3,12 @@ import { Modal, Alert, Button, Spinner } from "react-bootstrap";
 
 import { FaEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
-
 import { useState } from "react";
-
-
-import InputForm from "../forms/InputForm";
-import apiUpdateContent from "../../api/apiUpdateContent";
+import InputForm from "../forms/InputFloatingForm";
+import { UpdateContent } from "../../api/apiContent";
 
 /* eslint-disable react/prop-types */
 const ModalEditContent = ({ content }) => {
-
-
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -44,40 +39,39 @@ const ModalEditContent = ({ content }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          
-            <Form style={{ maxWidth: "800px", margin: "auto" }} className="p-4">
-              <Alert variant="info">
-                <strong>Info!</strong> Semua form wajib diisi.
-              </Alert>
-              <InputForm
-                type="text"
-                label="Title"
-                name="title"
-                placeholder="Masukkan Title"
-              />
-              <InputForm
-                type="text"
-                label="Released Year"
-                name="released_year"
-                placeholder="Masukkan Released Year"
-              />
-              <InputForm
-                type="text"
-                label="Genre"
-                name="genre"
-                placeholder="Masukkan Genre"
-              />
-              <InputForm
-                type="text"
-                label="Type"
-                name="type"
-                placeholder="Masukkan Type"
-              />
-              <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Batal
-                </Button>
-                {/* {isPending ? (
+          <Form style={{ maxWidth: "800px", margin: "auto" }} className="p-4">
+            <Alert variant="info">
+              <strong>Info!</strong> Semua form wajib diisi.
+            </Alert>
+            <InputForm
+              type="text"
+              label="Title"
+              name="title"
+              placeholder="Masukkan Title"
+            />
+            <InputForm
+              type="text"
+              label="Released Year"
+              name="released_year"
+              placeholder="Masukkan Released Year"
+            />
+            <InputForm
+              type="text"
+              label="Genre"
+              name="genre"
+              placeholder="Masukkan Genre"
+            />
+            <InputForm
+              type="text"
+              label="Type"
+              name="type"
+              placeholder="Masukkan Type"
+            />
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Batal
+              </Button>
+              {/* {isPending ? (
                   <Button variant="primary" disabled>
                     <Spinner
                       as="span"
@@ -93,9 +87,8 @@ const ModalEditContent = ({ content }) => {
                     Simpan
                   </Button>
                 )} */}
-              </Modal.Footer>
-            </Form>
-        
+            </Modal.Footer>
+          </Form>
         </Modal.Body>
       </Modal>
     </>

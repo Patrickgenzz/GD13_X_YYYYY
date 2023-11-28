@@ -14,9 +14,7 @@ const RegisterPage = () => {
           Sign Up
         </h1>
       </div>
-      <div className="FormGlass p-4">
         <FormRegister/>
-      </div>
     </Container>
   );
 };

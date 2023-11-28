@@ -3,7 +3,7 @@
 import { Form, FloatingLabel } from "react-bootstrap";
 
 /* eslint-disable */
-const InputForm = (props) => {
+const InputFloatingForm = (props) => {
   // const [field, meta] = useField(props);
 
   return (
@@ -12,10 +12,13 @@ const InputForm = (props) => {
         <Form.Control
           className="text-light bg-transparent border-secoondary"
           placeholder={props.placeholder}
+          onChange={props.onChange}
+          name={props.name}
+          type={props.type}
         />
       </FloatingLabel>
     </Form.Group>
   );
 };
 
-export default InputForm;
+export default InputFloatingForm;

@@ -1,19 +1,15 @@
 // @ts-nocheck
 import { Modal, Alert, Button, Spinner } from "react-bootstrap";
 
-
 import { FaPlusSquare } from "react-icons/fa";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-
-import InputForm from "../forms/InputForm";
-import apiCreateContent from "../../api/apiCreateContent";
+import InputForm from "../forms/InputFloatingForm";
+import { CreateContent } from "../../api/apiContent";
 
 /* eslint-disable react/prop-types */
 const ModalCreateContent = () => {
-
-
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -44,37 +40,36 @@ const ModalCreateContent = () => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          
-            <Form style={{ maxWidth: "800px", margin: "auto" }} className="p-4">
-              <Alert variant="info">
-                <strong>Info!</strong> Semua form wajib diisi.
-              </Alert>
-              <InputForm
-                type="text"
-                label="Title"
-                name="title"
-                placeholder="Masukkan Title"
-              />
-              <InputForm
-                type="texxt"
-                label="Released Year"
-                name="released_year"
-                placeholder="Masukkan Released Year"
-              />
-              <InputForm
-                type="text"
-                label="Genre"
-                name="genre"
-                placeholder="Masukkan Genre"
-              />
-              <InputForm
-                type="text"
-                label="Type"
-                name="type"
-                placeholder="Masukkan Type"
-              />
-              <Modal.Footer>
-                {/* <Button variant="secondary" onClick={handleClose}>
+          <Form style={{ maxWidth: "800px", margin: "auto" }} className="p-4">
+            <Alert variant="info">
+              <strong>Info!</strong> Semua form wajib diisi.
+            </Alert>
+            <InputForm
+              type="text"
+              label="Title"
+              name="title"
+              placeholder="Masukkan Title"
+            />
+            <InputForm
+              type="texxt"
+              label="Released Year"
+              name="released_year"
+              placeholder="Masukkan Released Year"
+            />
+            <InputForm
+              type="text"
+              label="Genre"
+              name="genre"
+              placeholder="Masukkan Genre"
+            />
+            <InputForm
+              type="text"
+              label="Type"
+              name="type"
+              placeholder="Masukkan Type"
+            />
+            <Modal.Footer>
+              {/* <Button variant="secondary" onClick={handleClose}>
                   Batal
                 </Button>
                 {isPending ? (
@@ -93,9 +88,8 @@ const ModalCreateContent = () => {
                     Simpan
                   </Button>
                 )} */}
-              </Modal.Footer>
-            </Form>
-  
+            </Modal.Footer>
+          </Form>
         </Modal.Body>
       </Modal>
     </>

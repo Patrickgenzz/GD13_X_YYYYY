@@ -9,8 +9,11 @@ const LoginPage = () => {
     <Container className="mt-5">
       <div className="text-center mb-3">
         <img src={imgCrown} width="150" alt="logo" />
-        <h1 className="mt-1 pb-1 text-primary fw-bold">Sign In</h1>
+        <h1 className="mt-1 pb-1  fw-bold" style={{ color: "#fafaff" }}>
+          Sign In
+        </h1>
       </div>
+
       <FormLogin />
     </Container>
   );

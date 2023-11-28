@@ -15,12 +15,9 @@ import { toast } from "react-toastify";
 import ModalCreateContent from "../components/modals/ModalCreateContent";
 import ModalEditContent from "../components/modals/ModalEditContent";
 
-import apiGetContents from "../api/apiGetContents";
-import apiDeleteContent from "../api/apiDeleteContent";
+import { GetContents, DeleteContent } from "../api/apiContent";
 
 const ContentPage = () => {
-
-
   const {
     data: contents,
     isLoading,
