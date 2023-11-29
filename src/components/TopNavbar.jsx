@@ -2,37 +2,37 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
 
-import imgCrown from "../assets/images/crown.png";
+import imgAH from "../assets/images/atmahub-white.png";
 
 /* eslint-disable react/prop-types */
 const TopNavbar = ({ routes }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const logout = () => {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
+    navigate("/");
+  };
+
   return (
     <Navbar
       fixed="top"
       collapseOnSelect
       expand="lg"
-      className="bg-body-tertiary shadow"
     >
       <Container>
         <Navbar.Brand
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/")}
+          tabIndex={0} // agar bisa diakses dengan keyboard
         >
           <div className="d-flex align-items-center">
             <img
-              alt="Crown Logo"
-              src={imgCrown}
-              width="50"
+              src={imgAH}
               height="50"
               className="d-inline-block align-top"
             />
-            <div className="ms-2">
-              <p className="mb-0 fs-5 fw-bold">Grand Atma</p>
-              <p className="small mb-0">Hotel & Resort</p>
-            </div>
           </div>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -50,6 +50,13 @@ const TopNavbar = ({ routes }) => {
                 </Button>
               </Nav.Link>
             ))}
+
+            {/* Log out */}
+            <Nav.Link onClick={logout}>
+              <Button variant="danger" className="w-100">
+                Log Out
+              </Button>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

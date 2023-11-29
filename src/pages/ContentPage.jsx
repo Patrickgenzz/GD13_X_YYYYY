@@ -15,66 +15,73 @@ import { toast } from "react-toastify";
 import ModalCreateContent from "../components/modals/ModalCreateContent";
 import ModalEditContent from "../components/modals/ModalEditContent";
 
-import { GetContents, DeleteContent } from "../api/apiContent";
+import { GetMyContents, DeleteContent } from "../api/apiContent";
+import { useEffect, useState } from "react";
+import { getThumbnail } from "../api";
 
 const ContentPage = () => {
-  const {
-    data: contents,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["contents"],
-    queryFn: apiGetContents,
-  });
 
-  // const { mutate: deleteContent, isPending } = useMutation({
-  //   mutationKey: "deleteContent",
-  //   mutationFn: apiDeleteContent,
-  //   onSuccess: (res) => {
-  //     toast.success(res.message);
-  //   },
-  //   onError: (error) => {
-  //     toast.error(error.message);
-  //     console.log(error);
-  //   },
-  // });
+  const [isLoading, setIsLoading] = useState(false);
+  const [contents, setContents] = useState([]);
+  const [isPending, setIsPending] = useState(false);
 
-  if (isLoading)
-    return (
-      <Container className="mt-4">
-        <Spinner
-          as="span"
-          animation="border"
-          variant="primary"
-          size="lg"
-          role="status"
-          aria-hidden="true"
-        />
-        <h6>Loading...</h6>
-      </Container>
-    );
+  const deleteContent = (id) => {
+    setIsPending(true);
+    DeleteContent(id).then((response) => {
+      setIsPending(false);
+      toast.success(response.message);
+      fetchContents();
+    }).catch((err) => {
+      console.log(err);
+      setIsPending(false);
+      toast.dark(`🫃 ` + err.message);
+    })
+  }
+
+  const fetchContents = () => {
+    setIsLoading(true);
+    GetMyContents().then((response) => {
+      setContents(response);
+      setIsLoading(false);
+    }).catch((err) => {
+      console.log(err);
+      setIsLoading(false);
+    })
+  }
+
+  useEffect(() => {
+    fetchContents();
+  }, [])
 
   return (
     <Container className="mt-4">
-      <Stack direction="horizontal" gap={3}>
-        <h1 className="fw-bold">Content Page</h1>
-        <div className="ms-auto">
-          <ModalCreateContent />
+      <Stack direction="horizontal" gap={3} className="mb-3">
+        <h1 className="h4 fw-bold mb-0 text-nowrap">My Videos</h1>
+        <hr className="border-top border-light opacity-50 w-100" />
+        <div className="ms-auto text-nowrap">
+          <ModalCreateContent onClose={fetchContents} />
         </div>
       </Stack>
-      {error ? (
-        <Alert variant="info" className="mt-3">
-          <strong>Info!</strong> Data masih kosong.
-        </Alert>
-      ) : (
+      {isLoading ? (
+        <div className="text-center">
+          <Spinner
+            as="span"
+            animation="border"
+            variant="primary"
+            size="lg"
+            role="status"
+            aria-hidden="true"
+          />
+          <h6 className="mt-2 mb-0">Loading...</h6>
+        </div>
+      ) : (contents?.length > 0 ? (
         <Table striped bordered hover>
           <thead>
             <tr>
               <th>No</th>
+              <th style={{ width: "200px" }}>Thumbnail</th>
               <th>Title</th>
-              <th>Released Year</th>
-              <th>Genre</th>
-              <th>Type</th>
+              <th>Description</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -82,14 +89,15 @@ const ContentPage = () => {
             {contents?.map((content, index) => (
               <tr key={content.id}>
                 <td>{index + 1}</td>
+                <td>
+                  <img src={getThumbnail(content.thumbnail)} alt="Thumbnail" className="object-fit-cover" style={{ width: "200px", aspectRatio: "16 / 9"}} />
+                </td>
                 <td>{content.title}</td>
-                <td>{content.released_year}</td>
-                <td>{content.genre}</td>
-                <td>{content.type}</td>
+                <td>{content.description}</td>
                 <td>
                   <Stack direction="horizontal" gap={2}>
-                    <ModalEditContent content={content} />
-                    {/* {isPending ? (
+                    <ModalEditContent content={content} onClose={fetchContents} />
+                    {isPending ? (
                       <Button variant="danger" disabled>
                         <Spinner
                           as="span"
@@ -108,14 +116,18 @@ const ContentPage = () => {
                         <FaTrash className="mx-1 mb-1" />
                         Hapus
                       </Button>
-                    )} */}
+                    )}
                   </Stack>
                 </td>
               </tr>
             ))}
           </tbody>
         </Table>
-      )}
+      ) : (
+        <Alert variant="dark" className="mt-3 text-center">
+          Belum ada video, yuk tambah video baru!
+        </Alert>
+      ))}
     </Container>
   );
 };

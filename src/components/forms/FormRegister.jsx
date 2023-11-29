@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { Button, Alert, Spinner, Form } from "react-bootstrap";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import InputFloatingForm from "./InputFloatingForm";
@@ -16,10 +16,6 @@ const FormRegister = () => {
     email: "",
     password: "",
   });
-
-  const moveToLogin = () => {
-    navigate("/");
-  };
 
   const handleChange = (event) => {
     setData({ ...data, [event.target.name]: event.target.value });
@@ -83,7 +79,7 @@ const FormRegister = () => {
         placeholder="Masukkan Password"
         autoComplete="off"
       />
-      <div className="d-flex justify-content-start">
+      <label className="d-flex justify-content-start">
         <Form.Check type="checkbox" onChange={handleCheck} />
         <p className="ms-2">
           Have you Already Read the{" "}
@@ -91,7 +87,7 @@ const FormRegister = () => {
             Terms of Service
           </a>
         </p>
-      </div>
+      </label>
       <Button
         disabled={isDisabled}
         type="submit"
@@ -101,9 +97,9 @@ const FormRegister = () => {
       </Button>
       <p className="text-end mt-2">
         Already Have an Account?{" "}
-        <a onClick={moveToLogin}>
-          <u>Click Here!</u>
-        </a>
+        <Link to="/">
+          Click Here!
+        </Link>
       </p>
     </Form>
   );

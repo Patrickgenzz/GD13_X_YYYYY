@@ -1,7 +1,7 @@
 import useAxios from ".";
-// Get Data
-const GetContents = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+// Get all contents
+export const GetAllContents = async () => {
+  // await new Promise((resolve) => setTimeout(resolve, 1000));
 
   try {
     const response = await useAxios.get("/contents", {
@@ -15,14 +15,50 @@ const GetContents = async () => {
     throw error.response.data;
   }
 };
-// Post / Create Data
-const CreateContent = async (data) => {
+
+// Get my contents
+export const GetMyContents = async () => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  const id = JSON.parse(sessionStorage.getItem("user")).id;
+  try {
+    const response = await useAxios.get(`/contents/user/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+    });
+    return response.data.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+// Get content by id
+export const GetContentById = async (id) => {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  try {
+    const response = await useAxios.get(`/contents/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+    });
+    return response.data.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+// Post / Create Data
+export const CreateContent = async (data) => {
+  // await new Promise((resolve) => setTimeout(resolve, 1000));
 
   try {
     const response = await useAxios.post("/contents", data, {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data", // untuk upload thumbnail
         Authorization: `Bearer ${sessionStorage.getItem("token")}`,
       },
     });
@@ -32,8 +68,8 @@ const CreateContent = async (data) => {
   }
 };
 // Put / Update Data
-const UpdateContent = async (values) => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+export const UpdateContent = async (values) => {
+  // await new Promise((resolve) => setTimeout(resolve, 1000));
 
   try {
     const response = await useAxios.put(`/contents/${values.id}`, values, {
@@ -48,7 +84,7 @@ const UpdateContent = async (values) => {
   }
 };
 // Delete Data
-const DeleteContent = async (id) => {
+export const DeleteContent = async (id) => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
   try {
@@ -63,5 +99,3 @@ const DeleteContent = async (id) => {
     throw error.response.data;
   }
 };
-
-export { GetContents, CreateContent, UpdateContent, DeleteContent };

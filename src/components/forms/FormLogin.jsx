@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Button, Alert, Spinner, Form } from "react-bootstrap";
 // import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import InputFloatingForm from "./InputFloatingForm";
@@ -15,11 +15,7 @@ const FormLogin = () => {
     email: "",
     password: "",
   });
-
-
-  const moveToRegister = () => {
-    navigate("/register");
-  };
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (event) => {
     setData({ ...data, [event.target.name]: event.target.value });
@@ -32,17 +28,18 @@ const FormLogin = () => {
 
   const Login = (event) => {
     event.preventDefault();
+    setLoading(true);
     SignIn(data)
       .then((res) => {
-        console.log("masuk sini");
         navigate("/user");
-        localStorage.setItem("token", res.token);
-        localStorage.setItem("user", JSON.stringify(res.user));
+        sessionStorage.setItem("token", res.access_token);
+        sessionStorage.setItem("user", JSON.stringify(res.user));
         toast.success(res.message);
       })
       .catch((err) => {
         console.log(err);
         toast.dark(`🫃 ` + err.message);
+        setLoading(false);
       });
   };
 
@@ -52,8 +49,9 @@ const FormLogin = () => {
       className="p-4"
       onSubmit={Login}
     >
-      <Alert variant="info" className="mb-5">
-        <strong>Info!</strong> Email dan Password Wajib diisi.
+      <Alert variant="primary" className="mb-5">
+        <p className="mb-0 lead"><strong>Atma</strong>Tube</p>
+        <p className="mb-0">Selamat datang. Silakan masuk ke akun Anda.</p>
       </Alert>
 
       <InputFloatingForm
@@ -75,16 +73,20 @@ const FormLogin = () => {
       <Button
         variant="primary"
         type="submit"
-        disabled={isDisabled}
+        disabled={isDisabled || loading}
         className="mt-3 w-100 border-0 buttonSubmit btn-lg"
       >
-        Sign In
+        {loading ? (
+          <Spinner animation="border" variant="light" size="sm" />
+        ) : (
+          <span>Login</span>
+        )}
       </Button>
       <p className="text-end mt-2">
         Don't have an Account?{" "}
-        <a onClick={moveToRegister}>
-          <u>Click Here!</u>
-        </a>
+        <Link to="/register">
+          Click Here!
+        </Link>
       </p>
     </Form>
   );

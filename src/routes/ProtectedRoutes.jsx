@@ -1,19 +1,21 @@
 import { useNavigate, Outlet } from "react-router-dom";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 /* eslint-disable react/prop-types */
 const ProtectedRoutes = ({ children }) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [token, setToken] = useState("");
 
-  // useEffect(() => {
-  //   const user = sessionStorage.getItem("user");
+  useEffect(() => {
+    const tokenDariSS = sessionStorage.getItem("token");
+    setToken(tokenDariSS);
 
-  //   if (!user) {
-  //     navigate("/login");
-  //   }
-  // }, [navigate]);
+    if (!tokenDariSS) {
+      navigate("/");
+    }
+  }, [navigate]);
 
-  // return children ? children : <Outlet />;
+  return token && (children ? children : <Outlet />)
 };
 
 export default ProtectedRoutes;

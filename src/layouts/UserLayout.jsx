@@ -8,16 +8,12 @@ import TopNavbar from "../components/TopNavbar";
 const routes = [
   {
     path: "/user",
-    name: "Dashboard",
+    name: "Home",
   },
   {
     path: "/user/content",
-    name: "Content",
-  },
-  {
-    path: "/login",
-    name: "Logout",
-  },
+    name: "My Videos",
+  }
 ];
 
 /* eslint-disable react/prop-types */

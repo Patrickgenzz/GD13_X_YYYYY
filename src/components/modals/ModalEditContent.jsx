@@ -1,95 +1,100 @@
 // @ts-nocheck
-import { Modal, Alert, Button, Spinner } from "react-bootstrap";
+import { Modal, Alert, Button, Spinner, Form } from "react-bootstrap";
 
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaImage, FaPlusSquare } from "react-icons/fa";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useState } from "react";
+
 import InputForm from "../forms/InputFloatingForm";
-import { UpdateContent } from "../../api/apiContent";
+import { UpdateContent, GetContentById } from "../../api/apiContent";
+import { getThumbnail } from "../../api";
 
 /* eslint-disable react/prop-types */
-const ModalEditContent = ({ content }) => {
+const ModalEditContent = ({ content, onClose }) => {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const [data, setData] = useState(content);
+  const [isPending, setIsPending] = useState(false);
+
+  const handleClose = () => {
+    setShow(false)
+    onClose();
+  };
   const handleShow = () => setShow(true);
 
-  // const { mutate: updateContent, isPending } = useMutation({
-  //   mutationKey: "updateContent",
-  //   mutationFn: apiUpdateContent,
-  //   onSuccess: (res) => {
-  //     toast.success(res.message);
-  //     handleClose();
-  //   },
-  //   onError: (error) => {
-  //     toast.error(error.message);
-  //     console.log(error);
-  //   },
-  // });
+  const handleChange = (event) => {
+    setData({ ...data, [event.target.name]: event.target.value });
+  };
+
+  const submitData = (event) => {
+    event.preventDefault();
+    setIsPending(true);
+
+    UpdateContent(data).then((response) => {
+      setIsPending(false);
+      toast.success(response.message);
+      handleClose();
+    }).catch((err) => {
+      console.log(err);
+      setIsPending(false);
+      toast.dark(`🫃 ` + err.message);
+    })
+  }
 
   return (
     <>
-      <Button variant="success" onClick={handleShow}>
+      <Button variant="primary" onClick={handleShow}>
         <FaEdit className="mx-1 mb-1" />
-        Edit
+        Ubah
       </Button>
       <Modal size="lg" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>
-            <h2 className="fw-bold">Tambah Content</h2>
-          </Modal.Title>
+          <Modal.Title>Edit Video</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Form style={{ maxWidth: "800px", margin: "auto" }} className="p-4">
-            <Alert variant="info">
-              <strong>Info!</strong> Semua form wajib diisi.
-            </Alert>
+        <Form onSubmit={submitData}>
+          <Modal.Body>
+            <div className="img-preview text-center position-relative mb-3" style={{ aspectRatio: "16 / 9" }}>
+              <img src={getThumbnail(data?.thumbnail)} alt="Thumbnail" className="w-100 h-100 object-fit-cover" />
+            </div>
             <InputForm
               type="text"
               label="Title"
               name="title"
               placeholder="Masukkan Title"
+              value={data?.title}
+              onChange={handleChange}
             />
             <InputForm
-              type="text"
-              label="Released Year"
-              name="released_year"
-              placeholder="Masukkan Released Year"
+              as="textarea"
+              label="Description"
+              name="description"
+              placeholder="Masukkan Description"
+              value={data?.description}
+              onChange={handleChange}
+              style={{ height: "8rem" }}
             />
-            <InputForm
-              type="text"
-              label="Genre"
-              name="genre"
-              placeholder="Masukkan Genre"
-            />
-            <InputForm
-              type="text"
-              label="Type"
-              name="type"
-              placeholder="Masukkan Type"
-            />
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Batal
-              </Button>
-              {/* {isPending ? (
-                  <Button variant="primary" disabled>
-                    <Spinner
-                      as="span"
-                      animation="grow"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />
-                    Loading...
-                  </Button>
-                ) : (
-                  <Button variant="primary" type="submit">
-                    Simpan
-                  </Button>
-                )} */}
-            </Modal.Footer>
-          </Form>
-        </Modal.Body>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Batal
+            </Button>
+            <Button variant="primary" type="submit" disabled={isPending}>
+              {isPending ? (
+                <>
+                  <Spinner
+                    as="span"
+                    animation="grow"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                  />
+                  Loading...
+                </>
+              ) : (
+                <span>Simpan</span>
+              )}
+            </Button>
+          </Modal.Footer>
+        </Form>
       </Modal>
     </>
   );
