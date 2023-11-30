@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { useState } from "react";
 import { Button, Alert, Spinner, Form } from "react-bootstrap";
-// import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -39,7 +38,7 @@ const FormLogin = () => {
       })
       .catch((err) => {
         console.log(err);
-        toast.dark(`🫃 ` + err.message);
+        toast.dark(err.message);
         setLoading(false);
       });
   };
@@ -52,14 +51,14 @@ const FormLogin = () => {
     >
       <Alert variant="primary" className="mb-5 alertColor">
         <p className="mb-0 lead">
-          <strong>Atma</strong>Tube
+          <strong>Atma</strong>Hub
         </p>
         <p className="mb-0">Selamat datang. Silakan masuk ke akun Anda.</p>
       </Alert>
 
       <InputFloatingForm
-        label="Username"
-        placeholder="Masukkan Username"
+        label="Email"
+        placeholder="Masukkan Email"
         name="email"
         type="email"
         onChange={handleChange}

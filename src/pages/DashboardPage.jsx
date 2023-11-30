@@ -10,13 +10,15 @@ const DashboardPage = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    GetAllContents().then((data) => {
-      setContents(data);
-      setIsLoading(false);
-    }).catch((err) => {
-      console.log(err);
-    })
-  }, [])
+    GetAllContents()
+      .then((data) => {
+        setContents(data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <Container className="mt-4">
@@ -36,27 +38,33 @@ const DashboardPage = () => {
           />
           <h6 className="mt-2 mb-0">Loading...</h6>
         </div>
-      ) : (contents?.length > 0 ? (
-          <Row>
-            {contents?.map((content) => (
-              <Col md={6} lg={4} className="mb-3" key={content.id}>
-                <div className="card text-white" style={{ aspectRatio: "16 / 9" }}>
-                  <img
-                    src={getThumbnail(content.thumbnail)}
-                    className="card-img w-100 h-100 object-fit-cover bg-light"
-                    alt="..."
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title text-truncate">{content.title}</h5>
-                    <p className="card-text">{content.description}</p>
-                  </div>
+      ) : contents?.length > 0 ? (
+        <Row>
+          {contents?.map((content) => (
+            <Col md={6} lg={4} className="mb-3" key={content.id}>
+              <div
+                className="card text-white"
+                style={{ aspectRatio: "16 / 9" }}
+              >
+                <img
+                  src={getThumbnail(content.thumbnail)}
+                  className="card-img w-100 h-100 object-fit-cover bg-light"
+                  alt="..."
+                />
+                <div className="card-body">
+                  <h5 className="card-title text-truncate">
+                    {content.title}
+                  </h5>
+                  <p className="card-text">{content.description}</p>
                 </div>
-              </Col>
-            ))}
-          </Row>
-        ) : (
-          <Alert variant="dark" className="text-center">Tidak ada video untukmu saat ini ☹️</Alert>
-        )
+              </div>
+            </Col>
+          ))}
+        </Row>
+      ) : (
+        <Alert variant="dark" className="text-center">
+          Tidak ada video untukmu saat ini ☹️
+        </Alert>
       )}
     </Container>
   );

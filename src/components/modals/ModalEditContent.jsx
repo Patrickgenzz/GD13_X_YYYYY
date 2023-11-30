@@ -1,12 +1,12 @@
 // @ts-nocheck
-import { Modal, Alert, Button, Spinner, Form } from "react-bootstrap";
+import { Modal, Button, Spinner, Form } from "react-bootstrap";
 
-import { FaEdit, FaImage, FaPlusSquare } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { FaEdit } from "react-icons/fa";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
 import InputForm from "../forms/InputFloatingForm";
-import { UpdateContent, GetContentById } from "../../api/apiContent";
+import { UpdateContent } from "../../api/apiContent";
 import { getThumbnail } from "../../api";
 
 /* eslint-disable react/prop-types */
@@ -16,7 +16,7 @@ const ModalEditContent = ({ content, onClose }) => {
   const [isPending, setIsPending] = useState(false);
 
   const handleClose = () => {
-    setShow(false)
+    setShow(false);
     onClose();
   };
   const handleShow = () => setShow(true);
@@ -29,16 +29,18 @@ const ModalEditContent = ({ content, onClose }) => {
     event.preventDefault();
     setIsPending(true);
 
-    UpdateContent(data).then((response) => {
-      setIsPending(false);
-      toast.success(response.message);
-      handleClose();
-    }).catch((err) => {
-      console.log(err);
-      setIsPending(false);
-      toast.dark(`🫃 ` + err.message);
-    })
-  }
+    UpdateContent(data)
+      .then((response) => {
+        setIsPending(false);
+        toast.success(response.message);
+        handleClose();
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsPending(false);
+        toast.dark(err.message);
+      });
+  };
 
   return (
     <>
@@ -52,8 +54,15 @@ const ModalEditContent = ({ content, onClose }) => {
         </Modal.Header>
         <Form onSubmit={submitData}>
           <Modal.Body>
-            <div className="img-preview text-center position-relative mb-3" style={{ aspectRatio: "16 / 9" }}>
-              <img src={getThumbnail(data?.thumbnail)} alt="Thumbnail" className="w-100 h-100 object-fit-cover" />
+            <div
+              className="img-preview text-center position-relative mb-3"
+              style={{ aspectRatio: "16 / 9" }}
+            >
+              <img
+                src={getThumbnail(data?.thumbnail)}
+                alt="Thumbnail"
+                className="w-100 h-100 object-fit-cover"
+              />
             </div>
             <InputForm
               type="text"

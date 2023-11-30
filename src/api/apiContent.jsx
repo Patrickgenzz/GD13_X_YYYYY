@@ -67,6 +67,7 @@ export const CreateContent = async (data) => {
     throw error.response.data;
   }
 };
+
 // Put / Update Data
 export const UpdateContent = async (values) => {
   // await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -83,6 +84,7 @@ export const UpdateContent = async (values) => {
     throw error.response.data;
   }
 };
+
 // Delete Data
 export const DeleteContent = async (id) => {
   await new Promise((resolve) => setTimeout(resolve, 1000));

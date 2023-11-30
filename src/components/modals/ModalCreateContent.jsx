@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Modal, Alert, Button, Spinner, Form } from "react-bootstrap";
+import { Modal, Button, Spinner, Form } from "react-bootstrap";
 
 import { FaImage, FaPlusSquare } from "react-icons/fa";
 import { useState } from "react";
@@ -19,7 +19,8 @@ const ModalCreateContent = ({ onClose }) => {
   const [thumbnail, setThumbnail] = useState(null);
 
   const handleClose = () => {
-    setShow(false)
+    setShow(false);
+    setThumbnail(null);
     onClose();
   };
   const handleShow = () => setShow(true);
@@ -37,20 +38,22 @@ const ModalCreateContent = ({ onClose }) => {
     formData.append("description", data.description);
     formData.append("thumbnail", thumbnail);
 
-    CreateContent(formData).then((response) => {
-      setIsPending(false);
-      toast.success(response.message);
-      handleClose();
-    }).catch((err) => {
-      console.log(err);
-      setIsPending(false);
-      toast.dark(`🫃 ` + JSON.stringify(err.message));
-    })
-  }
+    CreateContent(formData)
+      .then((response) => {
+        setIsPending(false);
+        toast.success(response.message);
+        handleClose();
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsPending(false);
+        toast.dark(JSON.stringify(err.message));
+      });
+  };
 
   const handleThumbnail = (event) => {
     setThumbnail(event.target.files[0]);
-  }
+  };
 
   return (
     <>
@@ -64,15 +67,36 @@ const ModalCreateContent = ({ onClose }) => {
         </Modal.Header>
         <Form onSubmit={submitData}>
           <Modal.Body>
-            <div className="img-preview text-center position-relative mb-3" style={{ aspectRatio: "16 / 9" }}>
+            <div
+              className="img-preview text-center position-relative mb-3"
+              style={{ aspectRatio: "16 / 9" }}
+            >
               {thumbnail && (
-                <img src={URL.createObjectURL(thumbnail)} alt="Thumbnail" className="w-100 h-100 object-fit-cover" />
+                <img
+                  src={URL.createObjectURL(thumbnail)}
+                  alt="Thumbnail"
+                  className="w-100 h-100 object-fit-cover"
+                />
               )}
-              <Button variant="primary" type="button" disabled={isPending} size="sm" className="w-fit h-fit position-absolute bottom-0 end-0 me-3 mb-3" onClick={() => document.getElementById("thumbnail").click()}>
+              <Button
+                variant="primary"
+                type="button"
+                disabled={isPending}
+                size="sm"
+                className="w-fit h-fit position-absolute bottom-0 end-0 me-3 mb-3"
+                onClick={() => document.getElementById("thumbnail").click()}
+              >
                 <FaImage /> Pilih Thumbnail
               </Button>
               {/* Input type file yang disembunyikan, diakses pakai tombol di atas */}
-              <input type="file" name="thumbnail" id="thumbnail" className="d-none" onChange={handleThumbnail} accept="image/*" />
+              <input
+                type="file"
+                name="thumbnail"
+                id="thumbnail"
+                className="d-none"
+                onChange={handleThumbnail}
+                accept="image/*"
+              />
             </div>
             <InputForm
               type="text"

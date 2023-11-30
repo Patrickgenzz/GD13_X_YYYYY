@@ -2,10 +2,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import MainLayout from "../layouts/MainLayout";
 import UserLayout from "../layouts/UserLayout";
 
-import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/auth/LoginPage";
 import RegisterPage from "../pages/auth/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";

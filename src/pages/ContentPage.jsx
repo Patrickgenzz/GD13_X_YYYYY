@@ -90,7 +90,9 @@ const ContentPage = () => {
               <tr key={content.id}>
                 <td>{index + 1}</td>
                 <td>
-                  <img src={getThumbnail(content.thumbnail)} alt="Thumbnail" className="object-fit-cover" style={{ width: "200px", aspectRatio: "16 / 9"}} />
+                  <img src={getThumbnail(content.thumbnail)} 
+                  alt="Thumbnail" className="object-fit-cover" 
+                  style={{ width: "200px", aspectRatio: "16 / 9"}} />
                 </td>
                 <td>{content.title}</td>
                 <td>{content.description}</td>

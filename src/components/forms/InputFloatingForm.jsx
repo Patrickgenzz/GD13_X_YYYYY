@@ -2,9 +2,7 @@
 
 import { Form, FloatingLabel } from "react-bootstrap";
 
-/* eslint-disable */
 const InputFloatingForm = (props) => {
-  // const [field, meta] = useField(props);
 
   return (
     <Form.Group className="mb-3" controlId={props.name}>
