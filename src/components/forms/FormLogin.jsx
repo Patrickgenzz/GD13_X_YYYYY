@@ -18,8 +18,9 @@ const FormLogin = () => {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (event) => {
-    setData({ ...data, [event.target.name]: event.target.value });
-    if (data.email.trim().length > 0 && data.password.length > 0) {
+    const newData = { ...data, [event.target.name]: event.target.value };
+    setData(newData);
+    if (newData.email.trim().length > 0 && newData.password.length > 0) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
@@ -49,8 +50,10 @@ const FormLogin = () => {
       className="p-4"
       onSubmit={Login}
     >
-      <Alert variant="primary" className="mb-5">
-        <p className="mb-0 lead"><strong>Atma</strong>Tube</p>
+      <Alert variant="primary" className="mb-5 alertColor">
+        <p className="mb-0 lead">
+          <strong>Atma</strong>Tube
+        </p>
         <p className="mb-0">Selamat datang. Silakan masuk ke akun Anda.</p>
       </Alert>
 
@@ -83,10 +86,7 @@ const FormLogin = () => {
         )}
       </Button>
       <p className="text-end mt-2">
-        Don't have an Account?{" "}
-        <Link to="/register">
-          Click Here!
-        </Link>
+        Don't have an Account? <Link to="/register">Click Here!</Link>
       </p>
     </Form>
   );

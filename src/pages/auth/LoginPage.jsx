@@ -30,6 +30,7 @@ const LoginPage = () => {
       </div>
 
       <FormLogin />
+      
     </Container>
   );
 };

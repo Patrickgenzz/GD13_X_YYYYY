@@ -46,7 +46,7 @@ const FormRegister = () => {
 
   return (
     <Form style={{ maxWidth: "800px", margin: "auto" }} onSubmit={Register}>
-      <Alert variant="info" className="mb-5">
+      <Alert variant="primary" className="mb-5 alertColor">
         <strong>Info!</strong> Semua form wajib diisi.
       </Alert>
       <InputFloatingForm
@@ -58,7 +58,7 @@ const FormRegister = () => {
       />
       <InputFloatingForm
         type="text"
-        label="Name"
+        label="Handle"
         name="handle"
         onChange={handleChange}
         placeholder="Masukkan Handle"
@@ -96,10 +96,7 @@ const FormRegister = () => {
         Register
       </Button>
       <p className="text-end mt-2">
-        Already Have an Account?{" "}
-        <Link to="/">
-          Click Here!
-        </Link>
+        Already Have an Account? <Link to="/">Click Here!</Link>
       </p>
     </Form>
   );

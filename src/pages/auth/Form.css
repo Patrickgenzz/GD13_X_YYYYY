@@ -14,5 +14,10 @@
 
 .buttonSubmit{
     /* background: #5D17A4!important; */
-    background: #694ead!important;
+    background: #2F528F!important;
 }
+
+.alertColor{
+  color: rgb(243, 235, 235)!important;
+}
+
