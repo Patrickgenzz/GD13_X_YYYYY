@@ -18,7 +18,6 @@ export const GetAllContents = async () => {
 
 // Get my contents
 export const GetMyContents = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
 
   const id = JSON.parse(sessionStorage.getItem("user")).id;
   try {
@@ -36,7 +35,6 @@ export const GetMyContents = async () => {
 
 // Get content by id
 export const GetContentById = async (id) => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
 
   try {
     const response = await useAxios.get(`/contents/${id}`, {
@@ -87,7 +85,7 @@ export const UpdateContent = async (values) => {
 
 // Delete Data
 export const DeleteContent = async (id) => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  // await new Promise((resolve) => setTimeout(resolve, 1000));
 
   try {
     const response = await useAxios.delete(`/contents/${id}`, {

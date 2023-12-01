@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
 
 import imgAH from "../assets/images/atmahub-white.png";
-import "./TopNavbar.css";
 
 /* eslint-disable react/prop-types */
 const TopNavbar = ({ routes }) => {

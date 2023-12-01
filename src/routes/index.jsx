@@ -16,6 +16,7 @@ const router = createBrowserRouter([
     path: "*",
     element: <div>Routes Not Found!</div>,
   },
+
   {
     children: [
       {
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  
   {
     path: "/user",
     element: (
