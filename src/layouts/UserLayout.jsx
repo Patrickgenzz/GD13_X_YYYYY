@@ -13,7 +13,11 @@ const routes = [
   {
     path: "/user/content",
     name: "My Videos",
-  }
+  },
+  {
+    path: "/user/profil",
+    name: "Profil",
+  },
 ];
 
 /* eslint-disable react/prop-types */

@@ -11,6 +11,7 @@ import ContentPage from "../pages/ContentPage";
 
 import ProtectedRoutes from "./ProtectedRoutes";
 import ReviewPage from "../pages/ReviewPage";
+import UserPage from "../pages/UserPage";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "/user/review/:id",
         element: <ReviewPage />,
+      },
+      {
+        path: "/user/profil",
+        element: <UserPage />,
       }
     ],
   },
