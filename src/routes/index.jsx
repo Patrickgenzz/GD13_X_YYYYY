@@ -10,6 +10,7 @@ import DashboardPage from "../pages/DashboardPage";
 import ContentPage from "../pages/ContentPage";
 
 import ProtectedRoutes from "./ProtectedRoutes";
+import ReviewPage from "../pages/ReviewPage";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  
   {
     path: "/user",
     element: (
@@ -46,6 +46,10 @@ const router = createBrowserRouter([
         path: "/user/content",
         element: <ContentPage />,
       },
+      {
+        path: "/user/review/:id",
+        element: <ReviewPage />,
+      }
     ],
   },
 ]);
