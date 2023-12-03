@@ -148,11 +148,13 @@ export default function ReviewPage() {
                 ) : (
                     <Card className="mb-4">
                         <div className="d-flex">
-                            <Card.Img
-                                src={getThumbnail(content?.thumbnail)}
-                                className="rounded object-fit-cover"
-                                style={{ aspectRatio: "16 / 9" }}
-                            />
+                            <div>
+                                <Card.Img
+                                    src={getThumbnail(content?.thumbnail)}
+                                    className="rounded object-fit-cover"
+                                    style={{ aspectRatio: "16 / 9" }}
+                                />
+                            </div>
                             <Card.Body className="flex-shrink-0" style={{ width: "300px" }}>
                                 <FaVideo className="mb-3 fs-1" />
                                 <h4>
@@ -201,7 +203,7 @@ export default function ReviewPage() {
                                         <img src={UserIcon} className="rounded-circle me-3" style={{ width: "4rem" }} />
                                     </div>
                                     <div className="w-100">
-                                        <h6 className="fw-bold">{review.Reviewer}</h6>
+                                        <h6 className="fw-bold">@{review.Reviewer}</h6>
                                         <p className="mb-0">{review.comment}</p>
                                     </div>
                                     {currentUser?.id === review.id_user && (
@@ -220,7 +222,7 @@ export default function ReviewPage() {
                     </div>
                 ) : (
                     <Alert variant="dark" className="text-center">
-                        Belum ada review, ayo tambahin review! 👉👈
+                        Belum ada review, ayo tambahin review!
                     </Alert>
                 )}
             </Container>
