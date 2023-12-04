@@ -63,7 +63,7 @@ export default function ReviewPage() {
                 toast.success(data.message)
             })
             .catch((err) => {
-                toast.error(JSON.stringify(err?.message));
+                toast.error(err?.message);
             })
             .finally(() => {
                 getReviews()
@@ -208,9 +208,9 @@ export default function ReviewPage() {
                                     </div>
                                     {currentUser?.id === review.id_user && (
                                         <div className="flex-shrink-0 flex">
-                                            <Button variant="primary" className="me-2" onClick={() => handleEditReview(review)}>
+                                            {/* <Button variant="primary" className="me-2" onClick={() => handleEditReview(review)}>
                                                 <FaEdit />
-                                            </Button>
+                                            </Button> */}
                                             <Button variant="danger" onClick={() => handleDeleteReview(review)}>
                                                 <FaTrashAlt />
                                             </Button>
