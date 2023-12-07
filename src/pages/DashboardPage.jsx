@@ -1,6 +1,14 @@
 // @ts-nocheck
 import { useEffect, useState } from "react";
-import { Alert, Button, Col, Container, Row, Spinner, Stack } from "react-bootstrap";
+import {
+  Alert,
+  Button,
+  Col,
+  Container,
+  Row,
+  Spinner,
+  Stack,
+} from "react-bootstrap";
 import { GetAllContents } from "../api/apiContent";
 import { getThumbnail } from "../api";
 import { Link } from "react-router-dom";
@@ -53,12 +61,13 @@ const DashboardPage = () => {
                   alt="..."
                 />
                 <div className="card-body">
-                  <h5 className="card-title text-truncate">
-                    {content.title}
-                  </h5>
+                  <h5 className="card-title text-truncate">{content.title}</h5>
                   <p className="card-text mb-2">{content.description}</p>
-                  <Link className="w-100 btn btn-primary" to={`/user/review/${content.id}`}>
-                    Review
+                  <Link
+                    className="w-100 btn btn-primary"
+                    to={`/user/comment/${content.id}`}
+                  >
+                    Comment
                   </Link>
                 </div>
               </div>

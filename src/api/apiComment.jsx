@@ -1,8 +1,8 @@
 import useAxios from ".";
 // Get all
-export const GetAllReviews = async (id) => {
+export const GetAllComments = async (id) => {
   try {
-    const response = await useAxios.get(`/reviews/${id}`, {
+    const response = await useAxios.get(`/comments/${id}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${sessionStorage.getItem("token")}`,
@@ -15,9 +15,9 @@ export const GetAllReviews = async (id) => {
 };
 
 // Post / Create Data
-export const CreateReview = async (data) => {
+export const CreateComment = async (data) => {
   try {
-    const response = await useAxios.post("/reviews", data, {
+    const response = await useAxios.post("/comments", data, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${sessionStorage.getItem("token")}`,
@@ -30,9 +30,9 @@ export const CreateReview = async (data) => {
 };
 
 // Put / Update Data
-export const UpdateReview = async (id, data) => {
+export const UpdateComment = async (id, data) => {
   try {
-    const response = await useAxios.put(`/reviews/${id}`, data, {
+    const response = await useAxios.put(`/comments/${id}`, data, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${sessionStorage.getItem("token")}`,
@@ -45,9 +45,9 @@ export const UpdateReview = async (id, data) => {
 };
 
 // Delete Data
-export const DeleteReview = async (id) => {
+export const DeleteComment = async (id) => {
   try {
-    const response = await useAxios.delete(`/reviews/${id}`, {
+    const response = await useAxios.delete(`/comments/${id}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${sessionStorage.getItem("token")}`,
