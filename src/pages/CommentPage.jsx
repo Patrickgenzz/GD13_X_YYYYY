@@ -187,12 +187,12 @@ export default function CommentPage() {
                     style={{ aspectRatio: "16 / 9" }}
                   />
                 </div>
-                <Card.Body className="flex-shrink-0" style={{ width: "300px" }}>
+                <Card.Body className="flex-shrink-0">
                   <div className="d-flex">
                     <FaVideo className="mb-3 fs-1 me-2" />
                     <h4 className="mt-2 mx-2">{content?.title}</h4>
                   </div>
-                  <p>{content?.description}</p>
+                  <p className="mb-0">{content?.description}</p>
                 </Card.Body>
               </div>
             </Card>
